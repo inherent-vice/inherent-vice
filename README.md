@@ -1,8 +1,8 @@
 # AI Engineer — Regulated Finance + Audit-Grade Agentic Systems
 
-I build production AI systems where correctness is not a vibe: ground truth, audit trails, regression gates, and human oversight decide whether an agent is allowed to act.
+I build production AI systems where correctness is measured, not assumed: ground truth, audit trails, regression gates, and human oversight decide whether an agent is allowed to act.
 
-**Current focus:** Fieldguide-aligned agentic evaluation for regulated finance — term-sheet extraction, coupon validation, anomaly detection, and operator workflows that survive audit review.
+**Current focus:** the supplier-side mirror of Fieldguide-style audit agents — term-sheet extraction, coupon validation, anomaly detection, and operator workflows that survive audit review.
 
 **Start here**
 
@@ -33,7 +33,7 @@ Repo: https://github.com/inherent-vice/termsheet-extraction-eval
 
 ### AITF — term-sheet OCR validation at audit scale
 
-Built and operated an OCR → SQL Server validation pipeline for structured derivative term sheets at Korea Asset Pricing.
+Built and operated the supplier-side mirror of Fieldguide's audit-agent loop: OCR term-sheet evidence → SQL Server ground truth → explainable field-level validation at Korea Asset Pricing.
 
 - Up to 89 fields across 410 derivative products yielded 48,443 actual comparison records after schedule and conditional rows.
 - Raw LLM/OCR extraction 71.4% → post-processed field accuracy 94.5%.
@@ -46,7 +46,7 @@ Built and operated an OCR → SQL Server validation pipeline for structured deri
 Daily swap + foreign-bond coupon validator with defense-in-depth around silent parser failures.
 
 - 469/469 comparable rows converged within 5bp in a 484-sample ground-truth benchmark.
-- Research loop improved 98.08% → 99.57% → 100% without changing engine code.
+- Evaluation loop improved 98.08% → 99.57% → 100% without changing engine code.
 - 8-layer validation stack: consensus, archive priors, Hampel/STL, LSTM-VAE, HistGBR, walk-forward checks, HMM regime logic, RAG oracle.
 - Production alarm lifecycle store with review states and expiry semantics.
 
