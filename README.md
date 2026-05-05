@@ -1,57 +1,100 @@
-# AI Engineer — Regulated Finance + Agentic Systems
+# AI Engineer — Regulated Finance + Audit-Grade Agentic Systems
 
-I build production agentic AI for regulated financial workflows.
-Based in Seoul. Currently at a Korean bond valuation firm.
+I build production AI systems where correctness is not a vibe: ground truth, audit trails, regression gates, and human oversight decide whether an agent is allowed to act.
+
+**Current focus:** Fieldguide-aligned agentic evaluation for regulated finance — term-sheet extraction, coupon validation, anomaly detection, and operator workflows that survive audit review.
+
+**Start here**
+
+- Portfolio: https://portfolio-ten-alpha-57.vercel.app
+- Public companion repo: https://github.com/inherent-vice/termsheet-extraction-eval
+- LinkedIn: https://www.linkedin.com/in/hyeonuk-lee-9203b6308/
+- GitHub: https://github.com/inherent-vice
+
+---
+
+## Flagship proof
+
+### termsheet-extraction-eval — public companion to my Fieldguide application
+
+Reference architecture for evaluating LLM-extracted structured financial data against synthetic ground truth.
+
+- Deterministic mock extractor: no API key required for the main benchmark.
+- Type-aware comparison: rate, numeric amount, date, spread, currency, enum, text.
+- Constraint + NULL inference stages catch silent extraction failures.
+- CI gate runs lint, tests, and v1/v2/v3 ablation on Python 3.10 / 3.11 / 3.12.
+- Synthetic benchmark: 20 products × 18 fields; v1 89.2% → v3 99.4% match rate.
+
+Repo: https://github.com/inherent-vice/termsheet-extraction-eval
 
 ---
 
 ## Recent production work
 
-**Term-sheet extraction & validation** — OCR → SQL Server comparison across
-89 fields × 410 derivative products. Lifted raw accuracy from **71.4% → 94.5%**
-via multi-stage constraint + NULL inference engines. OQS **92.52% [A grade]**.
+### AITF — term-sheet OCR validation at audit scale
 
-**8-layer ML defense for daily coupon validation** — Consensus, Archive Prior,
-Hampel+STL, LSTM-VAE, HistGBR, Walk-Forward drift, HMM regime, RAG oracle
-(ChromaDB + multilingual SBERT over 470 ground-truth descriptions). Detects
-silent parser bugs that engine+verifier cross-checks miss, in **under 1 second**
-(previously 20 minutes of manual debugging).
+Built and operated an OCR → SQL Server validation pipeline for structured derivative term sheets at Korea Asset Pricing.
 
-**Bond-anomaly detection with Google TimesFM 2.5** — 6-axis / 7-detector /
-11 analytical perspectives. Fully on-prem (regulatory constraint).
-Internal AI competition entry.
+- 89 fields × 410 products = 48,443 field comparisons in the core benchmark.
+- Raw LLM/OCR extraction 71.4% → post-processed field accuracy 94.5%.
+- OQS 92.52% [A], F1 96.71%, Cohen's κ 0.47, PABAK 0.84.
+- 7-stage pipeline: extraction, type-aware comparison, cross-field constraints, NULL inference, post-processing, schedule checks, audit metrics.
+- Final verification path used an external vision pass rather than AI self-judgment.
 
-**ARTPLEX e-commerce platform** — 22,815 products, 99.8% IP classification,
-86.2% character matching over 2,800+ master DB. Genkit + Gemini multi-agent
-marketing, 3 Cloud Run microservices, 100% Shopify migration (22,711 products).
+### CouponCheck — zero-code-change autoresearch loop
 
----
+Daily swap + foreign-bond coupon validator with defense-in-depth around silent parser failures.
 
-## Stack (production experience)
+- 469/469 rows converged within 5bp on a 484-sample ground-truth benchmark.
+- Research loop improved 98.08% → 99.57% → 100% without changing engine code.
+- 8-layer validation stack: consensus, archive priors, Hampel/STL, LSTM-VAE, HistGBR, walk-forward checks, HMM regime logic, RAG oracle.
+- Production alarm lifecycle store with review states and expiry semantics.
 
-**Languages** — Python · TypeScript · VBA · Bash
-**Frameworks** — FastAPI · Next.js 15 · Celery · Genkit · NautilusTrader
-**Data** — PostgreSQL + pgvector · ChromaDB · SQL Server · TimescaleDB · Redis · Supabase · QuestDB
-**AI** — Claude (API + Code) · Gemini · OpenAI · Ollama · MCP · Google ADK · LSTM-VAE · HMM · SBERT
-**Cloud** — Google Cloud Run · Firebase · Palantir Foundry · Vercel
-**Tooling** — Docker Compose · Turborepo · pnpm · Playwright · Selenium
+### Bond anomaly detection — regulated on-prem operations
 
----
+Scaled a KRW/FX/swap/CDS anomaly stack into a daily-runnable operations product.
 
-## Philosophy
-
-- **External verification > AI self-judgment** — external authority, not AI confidence, decides completion
-- **Defense-in-depth > single source of truth** — multiple independent layers catch silent bugs
-- **Documentation-first** — paired `CLAUDE.md` + `AGENTS.md` guides in 15+ repositories, enabling AI-native workflows
+- 9.4M rows across parquet caches.
+- 30+ orthogonal detectors and 17 pipeline stages.
+- 88.6% false-positive reduction on KRW bonds.
+- Fully on-prem path with local LLM explanation for regulatory constraints.
+- Textual TUI and operations modules for desk triage, drift watching, reports, and incident snapshots.
 
 ---
 
-## About the pinned repos
+## How I build
 
-Pinned repositories are **sanitized reference architectures** extracted from
-proprietary production systems. Code patterns and evaluation frameworks are
-public; domain-specific implementations available under NDA.
+- **External verification > AI self-judgment** — independent ground truth or human review decides completion.
+- **Evaluation before automation** — agents get replay fixtures, regression tests, and explicit pass/fail semantics before tools become writable.
+- **Traceability by default** — every recovery rule should leave an audit trail.
+- **Defense-in-depth** — multiple weaker independent checks beat one impressive black box.
+- **NDA-safe public proof** — proprietary systems are represented through sanitized fixtures, reference architectures, and reproducible benchmarks.
 
 ---
 
-📍 Seoul · Open to AI Engineer / Senior AI Engineer roles
+## Stack
+
+- Languages: Python, TypeScript, C#, VBA, Bash
+- Backend/data: FastAPI, Flask, Celery, SQL Server, PostgreSQL, Redis, ChromaDB, BigQuery, QuestDB
+- AI/ML: Claude, Gemini, OpenAI, Ollama/Gemma, Genkit, MCP, SBERT, HMM, LSTM-VAE, HistGBR, TimesFM, Matrix Profile, IForest
+- Frontend/operator surfaces: Next.js, React, Textual, WinForms, Tkinter, Alpine.js
+- Quality gates: pytest, ruff, mypy, golden-file regression, benchmark ablations, CI
+- Cloud/devops: Google Cloud Run, Firebase, Vercel, Docker Compose, GitHub Actions
+
+---
+
+## Portfolio map
+
+If you have 30 seconds:
+1. Open the portfolio: https://portfolio-ten-alpha-57.vercel.app
+2. Read the Mirror + Three Systems sections.
+3. Run the companion repo benchmark: `python -m termsheet_eval.cli benchmark --version all`.
+
+If you have 5 minutes:
+- Inspect the `termsheet-extraction-eval` README, tests, CI workflow, and regression tests.
+- Compare the v1/v2/v3 ablation results.
+- Look for the design pattern: model output is only the beginning; audit-grade systems need evaluation, constraints, inference, and traceability.
+
+---
+
+Based in Seoul. Open to AI Engineer / Senior AI Engineer roles in audit, risk, financial infrastructure, and agentic evaluation systems.
