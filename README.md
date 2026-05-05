@@ -35,17 +35,17 @@ Repo: https://github.com/inherent-vice/termsheet-extraction-eval
 
 Built and operated an OCR → SQL Server validation pipeline for structured derivative term sheets at Korea Asset Pricing.
 
-- 89 fields × 410 products = 48,443 field comparisons in the core benchmark.
+- Up to 89 fields across 410 derivative products yielded 48,443 actual comparison records after schedule and conditional rows.
 - Raw LLM/OCR extraction 71.4% → post-processed field accuracy 94.5%.
 - OQS 92.52% [A], F1 96.71%, Cohen's κ 0.47, PABAK 0.84.
 - 7-stage pipeline: extraction, type-aware comparison, cross-field constraints, NULL inference, post-processing, schedule checks, audit metrics.
 - Final verification path used an external vision pass rather than AI self-judgment.
 
-### CouponCheck — zero-code-change autoresearch loop
+### CouponCheck — zero-code-change evaluation loop
 
 Daily swap + foreign-bond coupon validator with defense-in-depth around silent parser failures.
 
-- 469/469 rows converged within 5bp on a 484-sample ground-truth benchmark.
+- 469/469 comparable rows converged within 5bp in a 484-sample ground-truth benchmark.
 - Research loop improved 98.08% → 99.57% → 100% without changing engine code.
 - 8-layer validation stack: consensus, archive priors, Hampel/STL, LSTM-VAE, HistGBR, walk-forward checks, HMM regime logic, RAG oracle.
 - Production alarm lifecycle store with review states and expiry semantics.
